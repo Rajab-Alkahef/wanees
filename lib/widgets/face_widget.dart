@@ -65,21 +65,23 @@ class _StateMachineMuscotState extends State<StateMachineMuscot> {
             on = controller.findSMI('start');
             off = controller.findSMI('off');
           }
-          setState(() => riveArtboard = artboard);
+          setState(() {
+            riveArtboard = artboard;
+          });
         } catch (e) {
           print(e);
         }
       },
     );
 
-    setState(() {
-      if (widget.emotion == 'Happy' || widget.emotion == 'Neutral') {
-        on?.value = true;
-      } else {
-        off?.value = true;
-      }
-      // print(widget.emotion);
-    });
+    // setState(() {
+    //   if (widget.emotion == 'Happy' || widget.emotion == 'Neutral') {
+    //     on?.value = true;
+    //   } else {
+    //     off?.value = true;
+    //   }
+    //   // print(widget.emotion);
+    // });
   }
 
   // void toggleDance(bool newValue) {
@@ -88,8 +90,16 @@ class _StateMachineMuscotState extends State<StateMachineMuscot> {
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {});
-    print("emotion is: ${widget.emotion}");
+    setState(() {
+      if (widget.emotion == 'Happy' || widget.emotion == 'Neutral') {
+        print("rive  emotion is: ${widget.emotion}");
+        on?.value = true;
+      } else {
+        print("rive emotion is: ${widget.emotion}");
+        off?.value = true;
+      }
+    });
+    print(" emotion is: ${widget.emotion}");
 
     return riveArtboard == null
         ? const SizedBox()
@@ -142,3 +152,35 @@ class _StateMachineMuscotState extends State<StateMachineMuscot> {
           );
   }
 }
+
+// @override
+// void initState() {
+//   super.initState();
+//   rootBundle.load('assets/flutter_animation_1.riv').then(
+//     (data) async {
+//       try {
+//         final file = RiveFile.import(data);
+//         final artboard = file.mainArtboard;
+//         var controller =
+//             StateMachineController.fromArtboard(artboard, 'tileBird');
+//         if (controller != null) {
+//           artboard.addController(controller);
+//           on = controller.findSMI('start');
+//           off = controller.findSMI('off');
+          
+//           // Add the logic for controlling animation based on emotion
+//           setState(() {
+//             if (widget.emotion == 'Happy' || widget.emotion == 'Neutral') {
+//               on?.value = true;
+//             } else {
+//               off?.value = true;
+//             }
+//           });
+//         }
+//         setState(() => riveArtboard = artboard);
+//       } catch (e) {
+//         print(e);
+//       }
+//     },
+//   );
+// }

@@ -72,7 +72,8 @@ class _HomeViewState extends State<HomeView> {
 
         imageToSend = await takePhoto();
         ApiHandler api = ApiHandler("as");
-        emotion = await api.sendData(imageToSend!);
+        var req = await api.sendData(imageToSend!);
+        emotion = req == 500 ? "Fearful" : req;
         setState(() {});
         print("emotion ########");
         print(emotion);
@@ -82,11 +83,13 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
-  takePhoto() async {
+  Future<XFile> takePhoto() async {
+    var alternativePic = XFile("assets/abd13.jpg");
     try {
       await _initializeControllerFuture;
       final XFile picture = await _controller.takePicture();
 
+      // var picture = basepicture ?? alternativePic ;
       setState(() {
         showCapturedPhoto = true;
       });
@@ -94,6 +97,7 @@ class _HomeViewState extends State<HomeView> {
       // Use 'picture' for further processing (e.g., display, save, share).
     } catch (e) {
       log("Error taking picture: $e");
+      return alternativePic;
     }
   }
 
@@ -134,6 +138,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    print('emotional damage============ $emotion');
     return Scaffold(
       backgroundColor: Colors.blue[600],
       body: Column(

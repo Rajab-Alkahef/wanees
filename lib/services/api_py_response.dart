@@ -70,7 +70,7 @@ class ApiHandler {
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://192.168.0.105:5000/api/photo/student'), //192.168.1.103
+            'http://192.168.0.104:5000/api/photo/student'), //192.168.1.103
       );
 
       print("photo.path ============ ${photo.path}");
@@ -91,6 +91,7 @@ class ApiHandler {
           return emotion;
         } else {
           print('Failed to send photo. Status code: ${response.statusCode}');
+          return response.statusCode;
         }
       } catch (e) {
         print('Error sending photo: $e');
