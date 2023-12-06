@@ -4,7 +4,7 @@ import 'package:voice_app/models/response_model.dart';
 // import 'package:voice_app/models/response_model.dart';
 
 class ApiRespons {
-  String apiKey = "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";
+  String apiKey = "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";
   // getResponse({String prompt = "Hello"}) async {
   //   final response = await http.post(
   //       Uri.parse("https://api.openai.com/v1/completions"),
@@ -53,7 +53,7 @@ class ApiRespons {
     } else {
       // Handle errors, e.g., print an error message or throw an exception
       print("Error: ${response.statusCode}");
-      return "Error occurred";
+      return "Iam not listening, please try again";
     }
   }
 }

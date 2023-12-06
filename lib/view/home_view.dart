@@ -73,7 +73,11 @@ class _HomeViewState extends State<HomeView> {
         imageToSend = await takePhoto();
         ApiHandler api = ApiHandler("as");
         var req = await api.sendData(imageToSend!);
-        emotion = req == 500 ? "Fearful" : req;
+        try {
+          emotion = req == 500 ? "Fearful" : req;
+        } catch (e) {
+          print(e);
+        }
         setState(() {});
         print("emotion ########");
         print(emotion);
@@ -181,8 +185,8 @@ class _HomeViewState extends State<HomeView> {
                 child: GestureDetector(
                   onTapUp: (de) async {
                     _stopListening();
-
-                    gptTalk = await apiRespons.getResponse(prompt: wordSpoken);
+                    gptTalk =
+                        await apiRespons.getResponse(prompt: "hi, how are you");
                     setState(() {});
                     TextToSpech.speak(text: gptTalk);
                     print("gptTalk======== $gptTalk");

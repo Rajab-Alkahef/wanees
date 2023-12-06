@@ -46,24 +46,24 @@ class _StateMachineMuscotState extends State<StateMachineMuscot> {
 
   Artboard? riveArtboard;
   //SMIBool? isDance;
-  SMITrigger? on;
-  SMITrigger? off;
+  SMITrigger? onHappy;
+  SMITrigger? onSad;
 
   @override
   void initState() {
     super.initState();
-    rootBundle.load('assets/flutter_animation_1.riv').then(
+    rootBundle.load('assets/emotion.riv').then(
       (data) async {
         try {
           final file = RiveFile.import(data);
           final artboard = file.mainArtboard;
           var controller =
-              StateMachineController.fromArtboard(artboard, 'tileBird');
+              StateMachineController.fromArtboard(artboard, 'emotion');
           if (controller != null) {
             artboard.addController(controller);
             //isDance = controller.findSMI('on');
-            on = controller.findSMI('start');
-            off = controller.findSMI('off');
+            onHappy = controller.findSMI('happy');
+            onSad = controller.findSMI('sad');
           }
           setState(() {
             riveArtboard = artboard;
@@ -93,10 +93,10 @@ class _StateMachineMuscotState extends State<StateMachineMuscot> {
     setState(() {
       if (widget.emotion == 'Happy' || widget.emotion == 'Neutral') {
         print("rive  emotion is: ${widget.emotion}");
-        on?.value = true;
+        onHappy?.value = true;
       } else {
         print("rive emotion is: ${widget.emotion}");
-        off?.value = true;
+        onSad?.value = true;
       }
     });
     print(" emotion is: ${widget.emotion}");
@@ -140,14 +140,14 @@ class _StateMachineMuscotState extends State<StateMachineMuscot> {
                   // ),
                 ],
               ),
-              Positioned(
-                top: 355,
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: 130,
-                  color: const Color(0xfffffbff),
-                ),
-              )
+              // Positioned(
+              //   top: 355,
+              //   child: Container(
+              //     width: MediaQuery.sizeOf(context).width,
+              //     height: 130,
+              //     color: const Color(0xfffffbff),
+              //   ),
+              // )
             ],
           );
   }

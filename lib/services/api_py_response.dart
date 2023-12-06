@@ -70,7 +70,7 @@ class ApiHandler {
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://192.168.0.104:5000/api/photo/student'), //192.168.1.103
+            'http://192.168.138.252:5000/api/photo/student'), //192.168.1.103
       );
 
       print("photo.path ============ ${photo.path}");
